@@ -35,7 +35,7 @@ const port = process.env.PORT || 8000;
 
 // Configura CORS
 app.use(cors({
-  origin: 'http://localhost:3000', // Permite solicitudes solo desde este origen
+  origin: 'https://yoloxochitl.uthhtics.com', // Permite solicitudes solo desde este origen
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
 }));
