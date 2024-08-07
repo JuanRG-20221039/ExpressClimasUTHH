@@ -130,3 +130,17 @@ export const getIoTDeviceAliasById = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+// Actualizar un estado de un dispositivo IoT
+const updateIoTDeviceEstado = async (req, res) => {
+    try {
+        await Iot.update(req.body, {
+            where: {
+                Id_iot: req.params.Id_iot
+            }
+        });
+        res.json({ message: 'Dispositivo IoT actualizado correctamente' });
+    } catch (error) {
+        res.json({ message: error.message });
+    }
+};
