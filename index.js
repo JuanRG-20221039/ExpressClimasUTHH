@@ -35,7 +35,7 @@ const port = process.env.PORT || 8000;
 
 const allowedOrigins = [
   'https://yoloxochitl.uthhtics.com',
-  'http://localhost:3000.com'
+  'http://localhost:3000'
 ];
 
 app.use(cors({
