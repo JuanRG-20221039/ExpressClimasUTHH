@@ -1,6 +1,7 @@
 // index.js
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors'; // Importa el paquete cors
 import sequelize from './config/sequelize.js'; // Importa la configuración de Sequelize
 
 // Importa todas las rutas
@@ -31,6 +32,13 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8000;
+
+// Configura CORS
+app.use(cors({
+  origin: 'http://localhost:3000', // Permite solicitudes solo desde este origen
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
+}));
 
 app.use(express.json()); // Permite que Express maneje JSON en las solicitudes
 
