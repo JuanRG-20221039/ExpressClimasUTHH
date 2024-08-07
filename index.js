@@ -33,9 +33,19 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 
-// Configura CORS
+const allowedOrigins = [
+  'https://yoloxochitl.uthhtics.com',
+  'http://localhost:3000.com'
+];
+
 app.use(cors({
-  origin: 'https://yoloxochitl.uthhtics.com', // Permite solicitudes solo desde este origen
+  origin: function(origin, callback){
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
 }));
