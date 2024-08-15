@@ -32,10 +32,12 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8000;
+const ip = '192.168.145.5'; //DIRECCION IP LOCAL PARA UNA CONEXION DE MANERA LOCAL CON LA ESP32
 
 const allowedOrigins = [
-  'https://yoloxochitl.uthhtics.com',
-  'http://localhost:3000'
+  'https://yoloxochitl.uthhtics.com', //PERMISOS PARA ACCEDER DESDE UN HOSTING EXTERNO
+  'http://localhost:3000',//PERMISOS PARA ACCEDER DE MANERA LOCAL
+  `http://${ip}` //PERMISOS PARA ACCEDER DESDE LA DIRECCION IP
 ];
 
 app.use(cors({
@@ -86,9 +88,10 @@ const startServer = async () => {
   try {
     await sequelize.sync(); // Cambia a `{ force: true }` para recrear tablas en desarrollo
 
-    app.listen(port, () => {
-      console.log(`Servidor corriendo en http://localhost:${port}`);
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`Servidor corriendo en http://localhost:${port} / http://${ip}:${port}`);
     });
+
   } catch (error) {
     console.error('Error al sincronizar los modelos:', error);
   }

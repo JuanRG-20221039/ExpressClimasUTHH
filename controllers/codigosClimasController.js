@@ -57,3 +57,41 @@ export const deleteCodigoClima = async (req, res) => {
         res.json({ message: error.message });
     }
 };
+
+// Buscar códigos de clima por Clave
+export const getCodigosClimaByClave = async (req, res) => {
+    try {
+        const { Clave } = req.params; // Asume que Clave se pasa como parámetro en la URL
+        const codigos = await CodigoClima.findAll({
+            where: {
+                Clave: Clave
+            }
+        });
+        if (codigos.length > 0) {
+            res.json(codigos);
+        } else {
+            res.status(404).json({ message: 'No se encontraron códigos con esa Clave' });
+        }
+    } catch (error) {
+        res.json({ message: error.message });
+    }
+};
+
+// Buscar códigos de clima por Id_marca
+export const getCodigosClimaByIdMarca = async (req, res) => {
+    try {
+        const { Id_marca } = req.params; // Asume que Id_marca se pasa como parámetro en la URL
+        const codigos = await CodigoClima.findAll({
+            where: {
+                Id_marca: Id_marca
+            }
+        });
+        if (codigos.length > 0) {
+            res.json(codigos);
+        } else {
+            res.status(404).json({ message: 'No se encontraron códigos para esa marca' });
+        }
+    } catch (error) {
+        res.json({ message: error.message });
+    }
+};
